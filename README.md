@@ -7,7 +7,7 @@ Progressive experiment to stand up some resources on GCP.
 - One hosting a static site
 - One providing a simple service (return the current time as JSON)
 
-`tl;dr`: build and run everything with `docker compose.
+`tl;dr`: build and run everything with `docker compose`.
 
 ```bash
 docker compose -f compose/compose.yaml build
@@ -181,9 +181,10 @@ for 10000 requests, 100 concurrent
 
 ```bash
  $ docker images
-REPOSITORY           TAG       IMAGE ID       CREATED         SIZE
-compose-deno-time    latest    487ae5658e6e   5 minutes ago   122MB
-compose-go-time      latest    1df4880c7283   8 minutes ago   14.3MB <---- Nice!
-compose-nginx-site   latest    ca03ce1b5089   8 minutes ago   142MB
-compose-caddy-site   latest    acfd32b5538f   8 minutes ago   46MB
+REPOSITORY            TAG       IMAGE ID       CREATED         SIZE
+compose-django-time   latest    a41f1a887396   6 minutes ago   972MB
+compose-deno-time     latest    487ae5658e6e   2 hours ago     122MB
+compose-go-time       latest    1df4880c7283   2 hours ago     14.3MB <---- Nice!
+compose-nginx-site    latest    ca03ce1b5089   2 hours ago     142MB
+compose-caddy-site    latest    acfd32b5538f   2 hours ago     46MB
 ```
