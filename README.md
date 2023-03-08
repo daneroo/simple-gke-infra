@@ -19,6 +19,8 @@ Then open your browser to:
 - NGinx Site: <http://localhost:8080>
 - Caddy Site: <http://localhost:8081>
 - Go Time Service: <http://localhost:8082>
+- Deno Time Service: <http://localhost:8083>
+- Django Time Service: <http://localhost:8084/api/time>
 
 ### 1.1: Static site (with `nginx`)
 
@@ -88,6 +90,17 @@ docker compose -f compose/compose.yaml build deno-time
 docker compose -f compose/compose.yaml up deno-time
 ```
 
+### 2.3 alternate: Time service built with `django`
+
+Also see a specific [example in their manual for Cloud Run using Oak](https://deno.land/manual@v1.31.0/advanced/deploying_deno/google_cloud_run)
+
+Run the following commands, then open your browser to <http://localhost:8084/api/time>
+
+```bash
+docker compose -f compose/compose.yaml build django-time
+docker compose -f compose/compose.yaml up django-time
+```
+
 ## Extras: load testing our service
 
 This is just for linux/CodeSpaces. If you're on a Mac, or windows, see [The repos Install notes](wget "https://hey-release.s3.us-east-2.amazonaws.com/hey_linux_amd64"). There are pre-built binaries for a you too.
@@ -99,9 +112,13 @@ chmod +x hey_linux_amd64
 # load test the go-time service
 # 10000 requests, 100 concurrent
 ./hey_linux_amd64 -n 10000 -c 100 http://localhost:8082
+./hey_linux_amd64 -n 10000 -c 100 http://localhost:8083
+./hey_linux_amd64 -n 10000 -c 100 http://localhost:8084/api/time
 ```
 
 ### Results
+
+This was for the go-time server, running on my local machine, with 10000 requests, 100 concurrent.
 
 ```txt
 Summary:
@@ -147,6 +164,18 @@ Details (average, fastest, slowest):
 Status code distribution:
   [200] 10000 responses
 ```
+
+Summary:
+
+for 10000 requests, 100 concurrent
+
+| Service     | Requests/sec |
+|-------------|-------------:|
+| go-time     |      10266.3 |
+| deno-time   |       5718.9 |
+| django-time |        520.3 |
+
+
 
 ## Extras: Image Sizes
 
