@@ -4,7 +4,7 @@ WORKDIR /app
 
 ADD . /app
 
-# RUN deno cache server.ts
+RUN deno cache server.ts
 
 EXPOSE 8000
 

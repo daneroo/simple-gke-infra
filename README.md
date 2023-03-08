@@ -50,6 +50,7 @@ docker run --rm -p 1312:80  coco
 ```
 
 Finally make a better looking html file!
+
 </details>
 
 ### 1.2 alternate: Static site (with `caddy`)
@@ -75,6 +76,7 @@ docker compose -f compose/compose.yaml up go-time
 Also see a specific [example in their manual for Cloud Run using Oak](https://deno.land/manual@v1.31.0/advanced/deploying_deno/google_cloud_run)
 
 ```bash
+curl -fsSL https://deno.land/x/install/install.sh | sh
 cd deno-time
 deno run --allow-net deno-time/server.ts
 ```
@@ -88,7 +90,8 @@ docker compose -f compose/compose.yaml up deno-time
 
 ## Extras: load testing our service
 
-This is just for linux/CodeSpaces.  If you're on a Mac, or windows, see [The repos Install notes](wget 'https://hey-release.s3.us-east-2.amazonaws.com/hey_linux_amd64'). There are pre-built binaries for a you too.
+This is just for linux/CodeSpaces. If you're on a Mac, or windows, see [The repos Install notes](wget "https://hey-release.s3.us-east-2.amazonaws.com/hey_linux_amd64"). There are pre-built binaries for a you too.
+
 ```bash
 wget 'https://hey-release.s3.us-east-2.amazonaws.com/hey_linux_amd64'
 chmod +x hey_linux_amd64
@@ -98,7 +101,7 @@ chmod +x hey_linux_amd64
 ./hey_linux_amd64 -n 10000 -c 100 http://localhost:8082
 ```
 
-### Results:
+### Results
 
 ```txt
 Summary:
@@ -107,7 +110,7 @@ Summary:
   Fastest:      0.0001 secs
   Average:      0.0090 secs
   Requests/sec: 10266.3278
-  
+
   Total data:   408887 bytes
   Size/request: 40 bytes
 
@@ -143,4 +146,15 @@ Details (average, fastest, slowest):
 
 Status code distribution:
   [200] 10000 responses
+```
+
+## Extras: Image Sizes
+
+```bash
+ $ docker images
+REPOSITORY           TAG       IMAGE ID       CREATED         SIZE
+compose-deno-time    latest    487ae5658e6e   5 minutes ago   122MB
+compose-go-time      latest    1df4880c7283   8 minutes ago   14.3MB <---- Nice!
+compose-nginx-site   latest    ca03ce1b5089   8 minutes ago   142MB
+compose-caddy-site   latest    acfd32b5538f   8 minutes ago   46MB
 ```
