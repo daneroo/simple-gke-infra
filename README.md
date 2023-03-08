@@ -16,6 +16,8 @@ docker build  -t coco .  # image size: 142MB
 docker run --rm -p 8080:80  coco
 ```
 
+<details><summary>Refinements</summary>
+
 #### Refinements
 
 Remove the odd `${PORT) substitution in the nginx:default.template file and Dockerfile:RUN command:
@@ -33,3 +35,6 @@ docker run --rm -p 1312:1312 -ePORT  coco
 # to
 docker run --rm -p 1312:80  coco
 ```
+
+Finally make a better looking html file!
+</details>
