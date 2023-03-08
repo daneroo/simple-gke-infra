@@ -170,12 +170,10 @@ Summary:
 for 10000 requests, 100 concurrent
 
 | Service     | Requests/sec |
-|-------------|-------------:|
+| ----------- | -----------: |
 | go-time     |      10266.3 |
 | deno-time   |       5718.9 |
 | django-time |        520.3 |
-
-
 
 ## Extras: Image Sizes
 

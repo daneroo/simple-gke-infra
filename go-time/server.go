@@ -10,14 +10,16 @@ import (
 func GetCurrentTimeAsJSON(w http.ResponseWriter, r *http.Request) {
 	currentTime := time.Now()
 	timeObj := struct {
-			Time time.Time `json:"time"`
+		Time time.Time `json:"time"`
+		Lang string    `json:"lang"`
 	}{
-			Time: currentTime,
+		Time: currentTime,
+		Lang: "Go",
 	}
 	timeJSON, err := json.Marshal(timeObj)
 	if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(timeJSON)
