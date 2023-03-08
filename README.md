@@ -9,11 +9,11 @@ Progressive experiment to stand up some resources on GCP.
 
 ### 1.1: Static site (with nginx)
 
+Run the following commands, then open your browser to <http://localhost:8080>
+
 ```bash
-cd site
-docker build  -t coco .  # image size: 142MB
-# run the container mapping the host port 8080 to the container port 80
-docker run --rm -p 8080:80  coco
+docker compose -f compose/compose.yaml build site
+docker compose -f compose/compose.yaml up site
 ```
 
 <details><summary>Refinements</summary>

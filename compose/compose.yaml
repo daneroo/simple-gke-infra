@@ -1,0 +1,12 @@
+# docker compose file
+# build and run the container in the ../site directory
+version: "3"
+services:
+  site:
+    build:
+      context: ../site
+      dockerfile: Dockerfile
+
+    # map external port 8080 to internal port 80
+    ports:
+      - "8080:80"
