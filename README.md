@@ -61,15 +61,30 @@ docker compose -f compose/compose.yaml build caddy-site
 docker compose -f compose/compose.yaml up caddy-site
 ```
 
-### 2: time service built with `go`
+### 2.1: Time service built with `go`
 
-Run the following commands, then open your browser to <http://localhost:8081>
+Run the following commands, then open your browser to <http://localhost:8082>
 
 ```bash
 docker compose -f compose/compose.yaml build go-time
 docker compose -f compose/compose.yaml up go-time
 ```
 
+### 2.2 alternate: Time service built with `deno`
+
+Also see a specific [example in their manual for Cloud Run using Oak](https://deno.land/manual@v1.31.0/advanced/deploying_deno/google_cloud_run)
+
+```bash
+cd deno-time
+deno run --allow-net deno-time/server.ts
+```
+
+Run the following commands, then open your browser to <http://localhost:8083>
+
+```bash
+docker compose -f compose/compose.yaml build deno-time
+docker compose -f compose/compose.yaml up deno-time
+```
 
 ## Extras: load testing our service
 
