@@ -2,6 +2,12 @@
 
 Progressive experiment to stand up some resources on GCP.
 
+## TODO
+
+- [x] All images listen to port 8080 - hard coded in Dockerfile/config
+- [ ] Validate Dockerfile EXPOSE Dynamic $PORT
+- [ ] Docker FROM image pinning (minor)
+
 ## Stage 1: two containers
 
 - One hosting a static site

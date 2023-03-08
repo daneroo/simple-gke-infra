@@ -28,5 +28,5 @@ func GetCurrentTimeAsJSON(w http.ResponseWriter, r *http.Request) {
 func main() {
 	log.Println("Starting go-time server ...")
 	http.HandleFunc("/", GetCurrentTimeAsJSON)
-	log.Fatal(http.ListenAndServe(":80", nil))
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }

@@ -17,6 +17,6 @@ RUN apk --no-cache add ca-certificates
 # Copy the `server` binary from the build stage
 COPY --from=build /app/server /app/server
 
-EXPOSE 80
+EXPOSE 8080
 
 CMD ["/app/server"]

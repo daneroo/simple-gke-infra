@@ -8,5 +8,5 @@ COPY Caddyfile /etc/caddy/Caddyfile
 # Copy the static HTML files into the container
 COPY public /usr/share/caddy
 
-# Expose port 80 for Caddy
-EXPOSE 80
+# Expose port 8080 for Caddy
+EXPOSE 8080
