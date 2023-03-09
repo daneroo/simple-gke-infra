@@ -4,6 +4,7 @@ Progressive experiment to stand up some resources on GCP.
 
 ## TODO
 
+- [ ] Figure out multi-platform builds from Mac mini M2 (buildx, bake,..)
 - [x] All images listen to port 8080 - hard coded in Dockerfile/config
 - [ ] Validate Dockerfile EXPOSE Dynamic $PORT
 - [ ] Docker FROM image pinning (minor)
