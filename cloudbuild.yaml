@@ -1,0 +1,18 @@
+steps:
+  # Build the Docker image and tag it with the commit sha.
+  - name: 'northamerica-northeast1-docker.pkg.dev/cloud-builders/docker'
+    args: ['build', '-t', 'northamerica-northeast1-docker.pkg.dev/$PROJECT_ID/simple-gke-infra-site/simple-site:$COMMIT_SHA', '.']
+  # Push the Docker image to the Google Container Registry.
+  - name: 'northamerica-northeast1-docker.pkg.dev/cloud-builders/docker'
+    args: ['push', 'northamerica-northeast1-docker.pkg.dev/$PROJECT_ID/simple-gke-infra-site/simple-site:$COMMIT_SHA']
+  # Deploy the container image to Cloud Run.
+  - name: 'northamerica-northeast1-docker.pkg.dev/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'simple-site'
+      - '--image=northamerica-northeast1-docker.pkg.dev/$PROJECT_ID/simple-gke-infra-site/simple-site:$COMMIT_SHA'
+      - '--platform=managed'
+      # Set other flags as needed, such as the region, memory allocation, etc.
+      - '--region=northamerica-northeast1'
+      # more flags could go here
