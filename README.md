@@ -5,8 +5,11 @@ Progressive experiment to stand up some resources on GCP.
 ## TODO
 
 - [ ] Figure out multi-platform builds from Mac mini M2 (buildx, bake,..)
+- [x] Django ALLOWED_HOSTS preventing from working on Cloud Run
+- [ ] Deno compile to shrink image size
+- [ ] Try to get a unique 'container id' static init/hostname - for each container / request id - ulid
 - [x] All images listen to port 8080 - hard coded in Dockerfile/config
-- [ ] Validate Dockerfile EXPOSE Dynamic $PORT
+- [ ] Validate Dockerfile EXPOSE Dynamic $PORT - and inject into container start
 - [ ] Docker FROM image pinning (minor)
 
 ## Stage 1: two containers
@@ -108,9 +111,12 @@ docker compose -f compose/compose.yaml build django-time
 docker compose -f compose/compose.yaml up django-time
 ```
 
-## Extras: load testing our service
+## Extras: load testing our service(s)
 
-This is just for linux/CodeSpaces. If you're on a Mac, or windows, see [The repos Install notes](wget "https://hey-release.s3.us-east-2.amazonaws.com/hey_linux_amd64"). There are pre-built binaries for a you too.
+See [`hey` installation docs](https://github.com/rakyll/hey#installation)
+If you're on a Mac, or windows, see docs, there are pre-built binaries for a you too.
+
+This is for linux/CodeSpaces/Google Cloud Shell.
 
 ```bash
 wget 'https://hey-release.s3.us-east-2.amazonaws.com/hey_linux_amd64'
