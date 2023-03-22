@@ -1,4 +1,4 @@
-# Deploy to GCP using bash/cli
+# Deploy to GCP using bash/cli (from Cloud Shell for example)
 
 See also `im-qcic/cloudrun`
 
