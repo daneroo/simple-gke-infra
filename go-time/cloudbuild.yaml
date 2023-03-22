@@ -27,6 +27,7 @@ steps:
       - "${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY}/${_SERVICE_NAME}:${COMMIT_SHA}"
       - "--region"
       - "${_REGION}"
+      - "--allow-unauthenticated"
 
 substitutions:
   # The must start with a "_" (_[A-Z0-9_]+)
