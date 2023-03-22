@@ -1,0 +1,36 @@
+steps:
+  # Build the container image
+  - name: "gcr.io/cloud-builders/docker"
+    args: [
+        "build",
+        "-t",
+        # Fully qualified container registry image name
+        "${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY}/${SERVICE_NAME}:${COMMIT_SHA}",
+        # docker context root
+        "${SERVICE_NAME}/.",
+      ]
+  # Push the container image to Container Registry
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "push",
+        "${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY}/${SERVICE_NAME}:${COMMIT_SHA}",
+      ]
+  # Deploy container image to Cloud Run
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      - "run"
+      - "deploy"
+      - "${SERVICE_NAME}"
+      - "--image"
+      - "${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY}/${SERVICE_NAME}:${COMMIT_SHA}"
+      - "--region"
+      - "${REGION}"
+
+substitutions:
+  ARTIFACT_REGISTRY: "simple-gke-infra"
+  SERVICE_NAME: "caddy-site"
+  REGION: "northamerica-northeast1"
+images:
+  - "${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY}/${SERVICE_NAME}:${COMMIT_SHA}"

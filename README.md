@@ -5,6 +5,10 @@ Progressive experiment to stand up some resources on GCP.
 ## TODO
 
 - [ ] Figure out multi-platform builds from Mac mini M2 (buildx, bake,..)
+- [ ] How about nextjs?
+  - <https://www.youtube.com/watch?v=Pd2tVxhFnO4>
+  - with-docker from vercel <https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile>
+  - Alt Dockerfile: <https://blog.logrocket.com/how-to-deploy-next-js-on-google-cloud-run/>
 - [x] Django ALLOWED_HOSTS preventing from working on Cloud Run
 - [ ] Deno compile to shrink image size
 - [ ] Try to get a unique 'container id' static init/hostname - for each container / request id - ulid
@@ -183,7 +187,7 @@ Summary:
 for 10000 requests, 100 concurrent
 
 | Service     | Requests/sec |
-| ----------- | -----------: |
+|-------------|-------------:|
 | go-time     |      10266.3 |
 | deno-time   |       5718.9 |
 | django-time |        520.3 |

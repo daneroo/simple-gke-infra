@@ -7,6 +7,7 @@ See also `im-qcic/cloudrun`
 gcloud auth login
 
 
+# project name is phx-danl
 export PROJECT_ID="pdcp-cloud-009-danl"
 export REGION="northamerica-northeast1"
 gcloud config set project ${PROJECT_ID}
@@ -51,7 +52,7 @@ chmod +x hey_linux_amd64 && mv hey_linux_amd64 /usr/local/bin/hey
 Testing from Cloud Shell:
 
 | Service     | Requests/sec |
-| ----------- | -----------: |
+|-------------|-------------:|
 | go-time     |       2627.1 |
 | deno-time   |       1915.7 |
 | django-time |        162.1 |
