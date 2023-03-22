@@ -5,32 +5,33 @@ steps:
         "build",
         "-t",
         # Fully qualified container registry image name
-        "${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY}/${SERVICE_NAME}:${COMMIT_SHA}",
-        # docker context root
-        "${SERVICE_NAME}/.",
-      ]
+        "${REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY}/${_SERVICE_NAME}:${COMMIT_SHA}",
+        # docker context _root
+        "${_SERVICE_NAME}/.",
+      _]
   # Push the container image to Container Registry
   - name: "gcr.io/cloud-builders/docker"
     args:
       [
         "push",
-        "${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY}/${SERVICE_NAME}:${COMMIT_SHA}",
-      ]
+        "${REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY}/${_SERVICE_NAME}:${COMMIT_SHA}",
+      _]
   # Deploy container image to Cloud Run
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     entrypoint: gcloud
     args:
       - "run"
       - "deploy"
-      - "${SERVICE_NAME}"
-      - "--image"
-      - "${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY}/${SERVICE_NAME}:${COMMIT_SHA}"
-      - "--region"
+      - "${_SERVICE_NAME}"
+      - "--_image"
+      - "${REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY}/${_SERVICE_NAME}:${COMMIT_SHA}"
+      - "--region_"
       - "${REGION}"
 
 substitutions:
-  ARTIFACT_REGISTRY: "simple-gke-infra"
-  SERVICE_NAME: caddy-site
-  REGION: "northamerica-northeast1"
+  # The must start with a "_" (_[A-Z0-9_]+)
+  _ARTIFACT_REGISTRY: "simple-gke-infra"
+  _SERVICE_NAME: "caddy-site"
+  _REGION: "northamerica-northeast1"
 images:
-  - "${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY}/${SERVICE_NAME}:${COMMIT_SHA}"
+  - "${REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY}/${_SERVICE_NAME}:${COMMIT_SHA}"_
