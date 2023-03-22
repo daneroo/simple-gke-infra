@@ -8,7 +8,6 @@ steps:
         "${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY}/${_SERVICE_NAME}:${COMMIT_SHA}",
         # docker context _root
         "${_SERVICE_NAME}/.",
-        _,
       ]
   # Push the container image to Container Registry
   - name: "gcr.io/cloud-builders/docker"
@@ -16,7 +15,6 @@ steps:
       [
         "push",
         "${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY}/${_SERVICE_NAME}:${COMMIT_SHA}",
-        _,
       ]
   # Deploy container image to Cloud Run
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
@@ -25,9 +23,9 @@ steps:
       - "run"
       - "deploy"
       - "${_SERVICE_NAME}"
-      - "--_image"
+      - "--image"
       - "${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY}/${_SERVICE_NAME}:${COMMIT_SHA}"
-      - "--region_"
+      - "--region"
       - "${_REGION}"
 
 substitutions:
