@@ -1,4 +1,4 @@
-# Using cue to validate/generated cloudbuild files
+# Using cue to validate/generate cloudbuild files
 
 Now the we have 5 cloudbuild.yaml files, lut simplify this with cue.
 
