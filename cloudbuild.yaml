@@ -31,6 +31,6 @@ steps:
 substitutions:
   ARTIFACT_REGISTRY: simple-gke-infra
   SERVICE_NAME: caddy-site
-  REGION: northamerica-northeast1
+  REGION: "northamerica-northeast1"
 images:
   - "${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY}/${SERVICE_NAME}:${COMMIT_SHA}"
