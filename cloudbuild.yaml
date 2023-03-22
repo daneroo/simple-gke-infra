@@ -29,7 +29,7 @@ steps:
       - "${REGION}"
 
 substitutions:
-  ARTIFACT_REGISTRY: simple-gke-infra
+  ARTIFACT_REGISTRY: "simple-gke-infra"
   SERVICE_NAME: caddy-site
   REGION: "northamerica-northeast1"
 images:
