@@ -1,6 +1,6 @@
 # Use the official Caddy image as the base image
 # Pin the minor version
-FROM caddy:2.6.4-alpine
+FROM caddy:2.6-alpine
 
 # Copy the Caddyfile into the container
 COPY Caddyfile /etc/caddy/Caddyfile
