@@ -5,7 +5,7 @@ steps:
         "build",
         "-t",
         # Fully qualified container registry image name
-        "${REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY}/${_SERVICE_NAME}:${COMMIT_SHA}",
+        "${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY}/${_SERVICE_NAME}:${COMMIT_SHA}",
         # docker context _root
         "${_SERVICE_NAME}/.",
         _,
@@ -15,7 +15,7 @@ steps:
     args:
       [
         "push",
-        "${REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY}/${_SERVICE_NAME}:${COMMIT_SHA}",
+        "${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY}/${_SERVICE_NAME}:${COMMIT_SHA}",
         _,
       ]
   # Deploy container image to Cloud Run
@@ -26,9 +26,9 @@ steps:
       - "deploy"
       - "${_SERVICE_NAME}"
       - "--_image"
-      - "${REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY}/${_SERVICE_NAME}:${COMMIT_SHA}"
+      - "${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY}/${_SERVICE_NAME}:${COMMIT_SHA}"
       - "--region_"
-      - "${REGION}"
+      - "${_REGION}"
 
 substitutions:
   # The must start with a "_" (_[A-Z0-9_]+)
@@ -36,4 +36,4 @@ substitutions:
   _SERVICE_NAME: "caddy-site"
   _REGION: "northamerica-northeast1"
 images:
-  - "${REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY}/${_SERVICE_NAME}:${COMMIT_SHA}"
+  - "${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY}/${_SERVICE_NAME}:${COMMIT_SHA}"
