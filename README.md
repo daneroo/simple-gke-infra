@@ -203,3 +203,58 @@ compose-go-time       latest    1df4880c7283   2 hours ago     14.3MB <---- Nice
 compose-nginx-site    latest    ca03ce1b5089   2 hours ago     142MB
 compose-caddy-site    latest    acfd32b5538f   2 hours ago     46MB
 ```
+
+## Extras: Security Scanning
+
+Two methods of scanning for vulnerabilities:
+
+- `docker scout cves`
+- `snyk`
+
+### With docker scout
+
+```bash
+for i in go-time deno-time django-time caddy-site nginx-site; do 
+  # output=$(docker scout cves compose-$i 2>&1 1>/dev/null)
+  echo Scout scan results for $i :
+  docker scout cves compose-$i 2>&1 1>/dev/null |grep -v '^Analyzing image'
+done
+```
+
+```txt
+Scout scan results for go-time :
+    ✓ SBOM of image already cached, 19 packages indexed
+    ✓ No vulnerable package detected
+Scout scan results for deno-time :
+    ✓ SBOM of image already cached, 23 packages indexed
+    ✗ Detected 1 vulnerable package with 2 vulnerabilities
+Scout scan results for django-time :
+    ✓ SBOM of image already cached, 573 packages indexed
+    ✗ Detected 36 vulnerable packages with a total of 114 vulnerabilities
+Scout scan results for caddy-site :
+    ✓ SBOM of image already cached, 138 packages indexed
+    ✗ Detected 1 vulnerable package with 5 vulnerabilities
+Scout scan results for nginx-site :
+    ✓ SBOM of image already cached, 77 packages indexed
+    ✓ No vulnerable package detected
+```
+
+
+### With snyk
+
+Install snyk: `brew tap snyk/tap; brew install snyk`
+
+```bash
+for i in go-time deno-time django-time caddy-site nginx-site; do 
+  # docker scan $i; 
+  echo Snyk scan results for $i :  $(snyk container test --json --file=$i/Dockerfile compose-$i:latest |jq -r .summary)
+done
+```
+
+```txt
+Scan results for go-time : No known operating system vulnerabilities
+Scan results for deno-time : 21 vulnerable dependency paths
+Scan results for django-time : 1774 vulnerable dependency paths
+Scan results for caddy-site : No known operating system vulnerabilities
+Scan results for nginx-site : No known vulnerabilities
+```
