@@ -56,3 +56,35 @@ Testing from Cloud Shell:
 | go-time     |       2627.1 |
 | deno-time   |       1915.7 |
 | django-time |        162.1 |
+
+## DNS
+
+After delegating my my own subdomain `dl.phac.alpha.canada.ca` to Google Cloud DNS in my own project,
+I created a `CNAME` record for each of the services  pointing to `go-time-2m3hexrmga-nn.a.run.app`
+
+This would be much easier with Cloud Run domain mappings, but they are not supported in any region that we are allowed to use inside our GCP environment.
+
+Traces of my failed attempt at provisioning a domain mapping:
+
+```bash
+gcloud run services list
+# get the current url
+gcloud run services describe nginx-site --format="value(status.url)"
+#  returns https://nginx-site-2m3hexrmga-nn.a.run.app
+
+# create the CNAME entry: nginx-site.r.dl.phac.alpha.canada.ca
+# which point to the url above; notice the trailing dot "nginx-site-2m3hexrmga-nn.a.run.app."
+
+export PROJECT_ID="pdcp-cloud-009-danl"
+
+gcloud dns record-sets transaction start --zone=dl-phac-alpha-canada-ca --project=${PROJECT_ID}
+gcloud dns record-sets transaction add --zone=dl-phac-alpha-canada-ca --name=nginx-site.r.dl.phac.alpha.canada.ca. --ttl=300 --type=CNAME "nginx-site-2m3hexrmga-nn.a.run.app." --project=${PROJECT_ID}
+gcloud dns record-sets transaction execute --zone=dl-phac-alpha-canada-ca --project=${PROJECT_ID}
+
+# Confirm it worked
+gcloud dns record-sets list --zone=dl-phac-alpha-canada-ca --project=${PROJECT_ID}
+gcloud dns record-sets describe --zone=dl-phac-alpha-canada-ca --project=${PROJECT_ID} --type CNAME nginx-site.r.dl.phac.alpha.canada.ca
+
+# Remove it
+gcloud dns record-sets delete --zone=dl-phac-alpha-canada-ca --project=${PROJECT_ID} --type CNAME nginx-site.r.dl.phac.alpha.canada.ca
+```
