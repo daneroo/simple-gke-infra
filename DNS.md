@@ -36,7 +36,7 @@ nameServers:
 
 ```
 
-### Add the delegate NS record in the parent zone - referring the the nameservers of the new zone ^
+### Add the delegate NS record in the parent zone - referring to the nameservers of the new zone ^
 
 Note: the NS records are added in a transaction, and then executed. The NS entries are positional parameters to the `gcloud dns record-sets transaction add` command. (not comma separated as a single parameter)
 
