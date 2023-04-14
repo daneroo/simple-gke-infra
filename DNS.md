@@ -1,4 +1,4 @@
-# Managing our own personal delegatred DNS Zone
+# Managing our own personal delegated DNS Zone
 
 We are  delegating a subdomain to our own project, so we can manage it's DNS records.
 
@@ -11,7 +11,7 @@ Steps:
 - Add a TXT record in the new zone to test
 
 I added an explicit `--project` parameter to each command, to make it clear which project I was working in.
-My project is reffered to as `${PROJECT_ID}` in the snippets below, whereas the parent project is referred to as `${DELEGATING_PROJECT_ID}`.
+My project is referred to as `${PROJECT_ID}` in the snippets below, whereas the parent project is referred to as `${DELEGATING_PROJECT_ID}`.
 The parent project is the one that is already managing the parent domain.
 
 ## Script snippets
@@ -38,7 +38,7 @@ nameServers:
 
 ### Add the delegate NS record in the parent zone - referring the the nameservers of the new zone ^
 
-Note: the NS records are added in a transaction, and then executed. The NS etries are positional parameters to the `gcloud dns record-sets transaction add` command. (not comma separated as a single parameter)
+Note: the NS records are added in a transaction, and then executed. The NS entries are positional parameters to the `gcloud dns record-sets transaction add` command. (not comma separated as a single parameter)
 
 ```bash
 export DELEGATING_PROJECT_ID="pdcp-serv-002-alpha-dns"
