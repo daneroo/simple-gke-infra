@@ -1,5 +1,8 @@
 # simple-gke-infra
 
+This project is deprecated/archived. It's content has moved to
+<https://github.com/daneroo/phac-garden>
+
 Progressive experiment to stand up some resources on GCP.
 
 ## TODO
